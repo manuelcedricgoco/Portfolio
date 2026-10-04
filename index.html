@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d0f14" />
+
+    <title>Manuel Cedric Goco | BSIT Student &amp; Software Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Manuel Cedric Goco — a BSIT student building modern web applications, management systems, dashboards, and practical software solutions."
+    />
+    <meta name="author" content="Manuel Cedric Goco" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (canonical, og:url and image URLs are added at build time from VITE_SITE_URL — see vite.config.ts) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Manuel Cedric Goco" />
+    <meta property="og:locale" content="en_PH" />
+    <meta property="og:title" content="Manuel Cedric Goco | BSIT Student &amp; Software Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Manuel Cedric Goco — a BSIT student building modern web applications, management systems, dashboards, and practical software solutions."
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MCG. — Manuel Cedric Goco, BSIT student and software developer" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Manuel Cedric Goco | BSIT Student &amp; Software Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Manuel Cedric Goco — a BSIT student building modern web applications, management systems, dashboards, and practical software solutions."
+    />
+
+    <!-- Apply the saved theme before first paint to avoid a flash. Dark is the default. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('mcg-theme');
+          document.documentElement.classList.toggle('dark', stored !== 'light');
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; padding: 2rem; color: #a4abbb">
+        This portfolio is a React app and needs JavaScript. Source code and projects:
+        <a href="https://github.com/manuelcedricgoco" style="color: #96a6ff">github.com/manuelcedricgoco</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

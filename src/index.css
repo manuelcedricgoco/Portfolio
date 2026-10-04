@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: <html class="dark"> (set before first paint in index.html). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Mona Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* Semantic colour tokens → utilities such as bg-surface, text-muted, border-line, text-accent-text */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+}
+
+@layer base {
+  /* Light theme */
+  :root {
+    color-scheme: light;
+    --bg: #f6f7fa;
+    --surface: #ffffff;
+    --elevated: #eef0f5;
+    --line: rgb(13 15 20 / 0.1);
+    --line-strong: rgb(13 15 20 / 0.18);
+    --fg: #0d0f14;
+    --muted: #4a5163;
+    --faint: #5d6475;
+    --accent: #3a50f0;
+    --accent-hover: #2f43d8;
+    --accent-fg: #ffffff;
+    --accent-text: #2a3bd0;
+    --accent-soft: rgb(58 80 240 / 0.09);
+    --grid: rgb(13 15 20 / 0.055);
+    --syn-kw: #2a3bd0;
+    --syn-str: #137a4a;
+    --syn-prop: #1a1d26;
+    --syn-punc: #5a6174;
+    --shadow-panel: 0 30px 70px -34px rgb(30 41 110 / 0.35), 0 2px 6px rgb(13 15 20 / 0.06);
+  }
+
+  /* Dark theme (default) */
+  :root.dark {
+    color-scheme: dark;
+    --bg: #0d0f14;
+    --surface: #12151c;
+    --elevated: #181c26;
+    --line: rgb(255 255 255 / 0.09);
+    --line-strong: rgb(255 255 255 / 0.16);
+    --fg: #f2f4f8;
+    --muted: #a5acbb;
+    --faint: #8c93a3;
+    --accent: #4d63ff;
+    --accent-hover: #4057f6;
+    --accent-fg: #ffffff;
+    --accent-text: #98a8ff;
+    --accent-soft: rgb(77 99 255 / 0.16);
+    --grid: rgb(255 255 255 / 0.05);
+    --syn-kw: #98a8ff;
+    --syn-str: #8fdcb0;
+    --syn-prop: #e4e8f0;
+    --syn-punc: #8791a6;
+    --shadow-panel: 0 40px 90px -40px rgb(77 99 255 / 0.5), 0 2px 8px rgb(0 0 0 / 0.4);
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-padding-top: 4rem;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 620;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-stretch: 90%;
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    font-stretch: 94%;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 38%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 3px;
+  }
+
+  /* Sections receive programmatic focus after in-page navigation; no ring needed. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 40rem) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Button display lives in the components layer so utilities (hidden, md:inline-flex …) can override it. */
+  .btn {
+    display: inline-flex;
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    color: var(--muted);
+    transition: color 0.2s, background-color 0.2s;
+  }
+
+  .icon-btn:hover {
+    color: var(--fg);
+    background-color: var(--elevated);
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      100deg,
+      var(--elevated) 30%,
+      color-mix(in oklab, var(--elevated), var(--fg) 9%) 50%,
+      var(--elevated) 70%
+    );
+    background-size: 220% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 72% 28%, #000 20%, transparent 74%);
+    mask-image: radial-gradient(ellipse 85% 75% at 72% 28%, #000 20%, transparent 74%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    right: -10rem;
+    top: -8rem;
+    height: 40rem;
+    width: 40rem;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 26%, transparent), transparent);
+    opacity: 0.7;
+  }
+
+  .caret {
+    display: inline-block;
+    height: 1.1em;
+    width: 0.55ch;
+    translate: 0 0.2em;
+    background: var(--accent-text);
+    animation: caret 1.1s steps(1) infinite;
+  }
+
+  .syn-kw { color: var(--syn-kw); }
+  .syn-str { color: var(--syn-str); }
+  .syn-prop { color: var(--syn-prop); }
+  .syn-punc { color: var(--syn-punc); }
+  .syn-com { color: var(--faint); font-style: italic; }
+}
+
+@keyframes shimmer {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+@keyframes caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
