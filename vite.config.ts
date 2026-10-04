@@ -55,8 +55,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   
   // Replace the dynamic base calculation with your exact repo name
-  const base = '/Portfolio/';
-
+const base = '/';
   return {
     base,
     plugins: [react(), tailwindcss(), siteMeta(env.VITE_SITE_URL ?? '', base), spaFallback()],
