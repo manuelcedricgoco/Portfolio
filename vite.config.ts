@@ -53,11 +53,11 @@ function siteMeta(siteUrl: string, base: string): Plugin {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
-  // Normalise to "/" or "/repo-name/".
-  const base = `/${(env.VITE_BASE ?? '').replace(/^\/+|\/+$/g, '')}/`.replace(/\/{2,}/g, '/');
+  
+  // Replace the dynamic base calculation with your exact repo name
+  const base = '/Portfolio/';
 
   return {
-    // Set VITE_BASE=/your-repo-name/ in .env when deploying to a GitHub Pages project site.
     base,
     plugins: [react(), tailwindcss(), siteMeta(env.VITE_SITE_URL ?? '', base), spaFallback()],
     resolve: {
